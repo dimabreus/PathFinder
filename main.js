@@ -23,7 +23,7 @@ async function pathFinder(maze) {
     };
 
     let currentDirection = directions.right;
-    let steps = 0; // Only for debug.
+    let steps = 0;
     const bounds = {
         x: maze[1].length - 1,
         y: maze.length - 1
@@ -37,6 +37,10 @@ async function pathFinder(maze) {
             console.log(debugMaze.map(el => `[${el.join(', ')}]`).join('\n'));
             console.log('Finished!');
             break;
+        } else if (curPos.x === 0 && curPos.y === 0 && steps != 0) {
+            console.log(debugMaze.map(el => `[${el.join(', ')}]`).join('\n'));
+            console.log('It looks impossible...');
+            return false;
         }
 
 
@@ -58,8 +62,8 @@ async function pathFinder(maze) {
 
         debugMaze[yOffset][xOffset] = 'X'
 
-        console.log(`Шагов: ${steps}.`);
-        console.log(`Иду на ${currentDirection}`)
+        console.log(`Steps: ${steps}.`);
+        console.log(`Going to ${currentDirection}`)
         console.log(debugMaze.map(el => `[${el.join(', ')}]`).join('\n'));
         console.log('\n')
 
@@ -106,6 +110,7 @@ async function pathFinder(maze) {
 
         await sleep(1000);
     }
+
     return true;
 }
 
